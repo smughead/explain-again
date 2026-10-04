@@ -7,6 +7,8 @@ declare module 'claude-code' {
       isRowOffered: boolean
       isChooserOpen: boolean
       picked: string | null
+      keptFormat: string | null
+      draftFormat: string | null
     }
   }
 }

@@ -1,6 +1,6 @@
 {
  "name": "explain-again",
- "version": "0.2.0",
+ "version": "0.3.0",
  "description": "After a longer reply, offers to re-explain it in plain English, as a diagram, a web page or a video, sent now or edited first (after Karpathy's output-format tips).",
  "author": {
   "name": "smughead"

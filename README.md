@@ -22,12 +22,21 @@ As a diagram:   [Send now]   [Edit first]   Back
 - **Edit first** puts the request in your message box so you can adjust it before sending.
 - **Back** returns to the four formats.
 
+The format you pick then stays on for the rest of the session: every later long reply comes in that format, with no extra click. Under long replies the row shows what is on, a Stop button, and the other formats if you want to switch:
+
+```
+Explaining as a video   [Stop]   [In plain English]   [As a diagram]   [As a web page]
+```
+
+**Edit first** turns the format on once you send the draft, as long as it still asks for that format (for example, it still says "video"). The choice is forgotten when the session ends.
+
 The row moves to each new long reply, steps aside while Claude is working, and never appears under short answers. Web pages and videos are saved outside your project, so your code folders stay clean.
 
 ## Commands
 
 - `/explain` opens the same choice above the message box, for your last reply.
-- `/explain plain`, `/explain diagram`, `/explain page` or `/explain video` sends right away.
+- `/explain plain`, `/explain diagram`, `/explain page` or `/explain video` sends right away and keeps that format on.
+- `/explain off` stops it.
 
 ## Install
 

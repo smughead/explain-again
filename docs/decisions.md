@@ -11,6 +11,16 @@ Built from Andrej Karpathy's post of October 1, 2026 on output formats for under
 - `/explain` opens the same two-step choice above the message box; `/explain plain|diagram|page|video` sends at once.
 - Requests are short and read like something a person would type. They are sent as the person's own words (they chose the button). Web pages and videos are saved outside the project.
 
+## Keep the format on (v0.3.0, October 4, 2026)
+
+The owner's request: picking a format should act like an output mode for the rest of the session, not a one-off.
+
+- Send now, `/explain <format>`, or sending an Edit first draft turns the format on. A sent draft counts only if it still names the format ("video", "diagram", "page", "plain"); a draft rewritten into something else leaves it off.
+- While it is on, each message the person sends (typed, or from their phone or the web) carries a note Claude reads and the person never sees: do what they asked, then give long replies (about 100 words or more) in that format; keep short replies short. The mod's own requests carry no note, so a re-explanation never triggers another.
+- Chosen over the alternative of letting Claude reply normally and then re-explaining automatically: that would cost two turns per long reply, and in video mode start a slow build after every reply.
+- The row under a long reply then reads "Explaining as a video", a Stop button, and the other three formats to switch to (through the usual Send now / Edit first step). `/explain off` also stops it.
+- Session only: the choice is forgotten when the session ends.
+
 ## How we got here
 
 1. A strip above the message box after every long reply, with all four formats. Worked, but it was disconnected from the reply.
@@ -30,6 +40,8 @@ Built from Andrej Karpathy's post of October 1, 2026 on output formats for under
 - Work started inside a slash command's handler is cut off when the command finishes; schedule it with `$.clock.after`.
 
 ## Open ideas
+
+- While a format is on, a short reply gets no row, so nothing shows that the format is on until the next long reply. If that confuses people, show the status and Stop under every latest reply while a format is on.
 
 - Ask Anthropic to let plugins add actions to the reply hover row (draft request below).
 - If the row starts to feel like wallpaper, show it only after dense, technical replies.
