@@ -1,0 +1,14 @@
+{
+  "name": "explain-again",
+  "description": "Explain Again, a Claude Code mod that re-explains the latest reply in a clearer format.",
+  "owner": {
+    "name": "smughead"
+  },
+  "plugins": [
+    {
+      "name": "explain-again",
+      "source": "./",
+      "description": "After a longer reply, offers to re-explain it in plain English, as a diagram, a web page or a video, sent now or edited first."
+    }
+  ]
+}

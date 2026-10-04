@@ -1,0 +1,37 @@
+# Design decisions
+
+## Origin (October 4, 2026)
+
+Built from Andrej Karpathy's post of October 1, 2026 on output formats for understanding language model work, ranked "but even better" each step: clear writing in ASD-STE100 (or "80% of the way" to it), diagrams, web pages, and custom explainer videos. The mod offers exactly those four, in that order.
+
+## What shipped in v0.2.0
+
+- Under the last piece of the latest long reply only (about 100 words or more), a row: gray "Explain another way" plus four of the app's own buttons.
+- Clicking a format swaps the same row in place to "Format:" plus Send now (filled), Edit first and Back. Same height and spacing in both states, so nothing moves.
+- `/explain` opens the same two-step choice above the message box; `/explain plain|diagram|page|video` sends at once.
+- Requests are short and read like something a person would type. They are sent as the person's own words (they chose the button). Web pages and videos are saved outside the project.
+
+## How we got here
+
+1. A strip above the message box after every long reply, with all four formats. Worked, but it was disconnected from the reply.
+2. A hover icon (⇄) on every reply that opened the strip. Too hidden, and the hover row could not sit next to the app's own reply icons.
+3. Six entry points mocked up side by side (row under the latest reply, footer button, collapsible pill, suggestion in the message box, label on every reply, `/explain`). Chosen: the row under the latest reply, plus `/explain`.
+4. Each format as a chip with a ✎ inside for "edit first", plus a one-time tip explaining the ✎. Two click targets per chip felt busy, and only the text was clickable.
+5. The owner's idea, shipped: one button per format, and the send-or-edit choice appears only after a click.
+
+## Platform limits found (Claude Code 2.1.286, desktop Code tab)
+
+- A mod cannot add an action to the app's own reply hover row (copy, branch, pin, read aloud).
+- Buttons: a `plain` Button draws as bare text whose hover hugs the text; padding or non-breaking spaces in the label do not widen it. A non-plain Button draws as the app's small bordered button; `primary` is filled dark.
+- Mod buttons take text labels only, and there are no native tooltips. Custom tooltips placed by character offsets misalign on desktop.
+- An element hidden until hover cannot itself be the hover target: keep the hovered box visible and hide a box inside it, or the whole drawing is refused.
+- A refused drawing above the message box shows nothing at all. A refused drawing of a reply falls back to the app's own.
+- Custom drawn regions (`Client`) are not available on desktop yet.
+- Work started inside a slash command's handler is cut off when the command finishes; schedule it with `$.clock.after`.
+
+## Open ideas
+
+- Ask Anthropic to let plugins add actions to the reply hover row (draft request below).
+- If the row starts to feel like wallpaper, show it only after dense, technical replies.
+
+> **Let plugins add actions to the reply hover row.** In the desktop Code tab, each Claude reply has a hover row (copy, branch, pin, read aloud). Plugins can redraw a reply's text but can't add an action to that row. Request: a way for a plugin to register a reply action (icon, accessible label or tooltip, press handler) that appears in the existing hover row and receives the reply's text or id when pressed.
