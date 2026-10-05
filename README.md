@@ -32,7 +32,7 @@ Explaining as a video   [Stop]   Switch to   [In plain English]   [As a diagram]
 
 **Edit first** turns the format on once you send the draft, as long as it still asks for that format (for example, it still says "video"). The choice is forgotten when the session ends.
 
-The row moves to each new long reply, steps aside while Claude is working, and never appears under short answers. Web pages and videos are saved outside your project, so your code folders stay clean.
+The row moves to each new long reply and steps aside while Claude is working. Short answers get no row unless a format is on. Web pages and videos are saved outside your project, so your code folders stay clean.
 
 ## Commands
 
@@ -42,7 +42,7 @@ The row moves to each new long reply, steps aside while Claude is working, and n
 
 ## Install
 
-**From GitHub** (you need access to this repository while it is private):
+**From GitHub:**
 
 ```
 claude plugin marketplace add smughead/explain-again
