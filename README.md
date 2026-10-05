@@ -2,7 +2,9 @@
 
 A Claude Code mod that re-explains Claude's latest long reply in a format that is easier to take in: in plain English, as a diagram, as a web page, or as a video.
 
-It grew out of Andrej Karpathy's post of October 1, 2026 about output formats for understanding what language models produce: clear controlled writing (ASD-STE100), diagrams, web pages and explainer videos. As AI does more of the work, more of our job becomes understanding it. This mod puts those formats one click away, right where a reply loses you.
+![Clicking "As a web page" under a long Claude reply, then "Send now". Claude builds an interactive page that explains the reply.](docs/media/demo.gif)
+
+It grew out of [Andrej Karpathy's post](https://x.com/karpathy/status/2105819303471976479) of October 1, 2026 about output formats for understanding what language models produce: clear controlled writing (ASD-STE100), diagrams, web pages and explainer videos. As AI does more of the work, more of our job becomes understanding it. This mod puts those formats one click away, right where a reply loses you.
 
 ## What you see
 
