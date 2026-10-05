@@ -49,6 +49,8 @@ claude plugin marketplace add smughead/explain-again
 claude plugin install explain-again@explain-again
 ```
 
+Then start a new session. The mod loads when a session starts.
+
 **For development** (live editing): point Claude Code at this folder in `~/.claude/settings.json`. Terminal sessions reload the mod whenever a file changes. Desktop app sessions only do so with `CLAUDE_CODE_PLUGIN_DIR_WATCH` set; without it they keep the version they started with, so test changes in a new session.
 
 ```json
