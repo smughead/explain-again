@@ -70,3 +70,7 @@ claude plugin test .
 The first line checks the mod itself; the second checks the install file (`marketplace.json`).
 
 Why the mod looks and behaves the way it does, and what the platform can't do yet: [docs/decisions.md](docs/decisions.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
