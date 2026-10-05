@@ -18,7 +18,8 @@ The owner's request: picking a format should act like an output mode for the res
 - Send now, `/explain <format>`, or sending an Edit first draft turns the format on. A sent draft counts only if it still names the format ("video", "diagram", "page", "plain"); a draft rewritten into something else leaves it off.
 - While it is on, each message the person sends (typed in the terminal or the desktop app, or from their phone or the web) carries a note Claude reads and the person never sees: do what they asked, then give long replies (about 100 words or more) in that format; keep short replies short. The mod's own requests carry no note, so a re-explanation never triggers another.
 - Chosen over the alternative of letting Claude reply normally and then re-explaining automatically: that would cost two turns per long reply, and in video mode start a slow build after every reply.
-- The row then reads "Explaining as a video", a Stop button, and the other three formats to switch to (through the usual Send now / Edit first step). `/explain off` also stops it.
+- The row then reads "Explaining as a video", a Stop button, a gray "Switch to", and the other three formats (through the usual Send now / Edit first step). `/explain off` also stops it.
+- "Switch to" was added after the first live look: with only spacing between them, Stop read as one more format. A filled Stop was considered and rejected as too loud under every reply.
 - While a format is on, the row sits under every latest reply, short ones included. First live test: a diagram reply has little text, so under the length rule the row vanished exactly when the format was working. With no format on, short replies still get no row.
 - The desktop Code tab hosts Claude Code through the SDK, so the person's messages there arrive as `sdk`, not `composer`. The first build counted only `composer` and silently skipped every desktop message.
 - Session only: the choice is forgotten when the session ends.

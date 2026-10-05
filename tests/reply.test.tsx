@@ -192,6 +192,7 @@ test('Send now keeps the format on: later messages ask for it, the row shows it 
   const newest = await $.ui.mount({ plugin: 'explain-again', surface: 'desktop', ...piece(OLD_REPLY) })
   expect(await newest.find({ type: 'Text', text: /Explaining as a video/ })).toBeDefined()
   expect(await newest.find({ key: 'stop' })).toBeDefined()
+  expect(await newest.find({ type: 'Text', text: 'Switch to' })).toBeDefined()
   expect(await newest.find({ key: 'video' })).toBeUndefined()
   for (const key of ['plain', 'diagram', 'page']) {
     expect(await newest.find({ key })).toBeDefined()

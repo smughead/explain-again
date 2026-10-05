@@ -25,7 +25,7 @@ As a diagram:   [Send now]   [Edit first]   Back
 The format you pick then stays on for the rest of the session: every later long reply comes in that format, with no extra click. Under the latest reply (short ones too, while a format is on) the row shows what is on, a Stop button, and the other formats if you want to switch:
 
 ```
-Explaining as a video   [Stop]   [In plain English]   [As a diagram]   [As a web page]
+Explaining as a video   [Stop]   Switch to   [In plain English]   [As a diagram]   [As a web page]
 ```
 
 **Edit first** turns the format on once you send the draft, as long as it still asks for that format (for example, it still says "video"). The choice is forgotten when the session ends.

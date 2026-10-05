@@ -115,6 +115,7 @@ function actionsFor($: EngineInterface) {
 // The choices, in one row that swaps in place: first the four formats; after a click, that format's
 // Send now / Edit first. Same height, spacing and gray lead in both states, so the swap stays calm.
 // While a format stays on, the row leads with it and Stop, then offers the other formats to switch to.
+// The gray "Switch to" splits the two groups, so Stop does not read as one more format.
 function choiceRow(
   { Box, Button, Text }: Shared,
   actions: ReturnType<typeof actionsFor>,
@@ -141,6 +142,9 @@ function choiceRow(
       <Box flexDirection="row" gap={1} alignItems="center" flexWrap="wrap">
         <Text dimColor>{statusFor(kept)}</Text>
         <Button key="stop" label="Stop" onPress={actions.stop} />
+        <Box marginLeft={1}>
+          <Text dimColor>Switch to</Text>
+        </Box>
         {FORMATS.filter(format => format !== kept).map(format => (
           <Button key={format.key} label={format.label} onPress={() => actions.pick(format)} />
         ))}
