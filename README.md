@@ -22,7 +22,7 @@ As a diagram:   [Send now]   [Edit first]   Back
 - **Edit first** puts the request in your message box so you can adjust it before sending.
 - **Back** returns to the four formats.
 
-The format you pick then stays on for the rest of the session: every later long reply comes in that format, with no extra click. Under long replies the row shows what is on, a Stop button, and the other formats if you want to switch:
+The format you pick then stays on for the rest of the session: every later long reply comes in that format, with no extra click. Under the latest reply (short ones too, while a format is on) the row shows what is on, a Stop button, and the other formats if you want to switch:
 
 ```
 Explaining as a video   [Stop]   [In plain English]   [As a diagram]   [As a web page]

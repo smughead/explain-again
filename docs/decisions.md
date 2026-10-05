@@ -16,9 +16,11 @@ Built from Andrej Karpathy's post of October 1, 2026 on output formats for under
 The owner's request: picking a format should act like an output mode for the rest of the session, not a one-off.
 
 - Send now, `/explain <format>`, or sending an Edit first draft turns the format on. A sent draft counts only if it still names the format ("video", "diagram", "page", "plain"); a draft rewritten into something else leaves it off.
-- While it is on, each message the person sends (typed, or from their phone or the web) carries a note Claude reads and the person never sees: do what they asked, then give long replies (about 100 words or more) in that format; keep short replies short. The mod's own requests carry no note, so a re-explanation never triggers another.
+- While it is on, each message the person sends (typed in the terminal or the desktop app, or from their phone or the web) carries a note Claude reads and the person never sees: do what they asked, then give long replies (about 100 words or more) in that format; keep short replies short. The mod's own requests carry no note, so a re-explanation never triggers another.
 - Chosen over the alternative of letting Claude reply normally and then re-explaining automatically: that would cost two turns per long reply, and in video mode start a slow build after every reply.
-- The row under a long reply then reads "Explaining as a video", a Stop button, and the other three formats to switch to (through the usual Send now / Edit first step). `/explain off` also stops it.
+- The row then reads "Explaining as a video", a Stop button, and the other three formats to switch to (through the usual Send now / Edit first step). `/explain off` also stops it.
+- While a format is on, the row sits under every latest reply, short ones included. First live test: a diagram reply has little text, so under the length rule the row vanished exactly when the format was working. With no format on, short replies still get no row.
+- The desktop Code tab hosts Claude Code through the SDK, so the person's messages there arrive as `sdk`, not `composer`. The first build counted only `composer` and silently skipped every desktop message.
 - Session only: the choice is forgotten when the session ends.
 
 ## How we got here
@@ -41,7 +43,6 @@ The owner's request: picking a format should act like an output mode for the res
 
 ## Open ideas
 
-- While a format is on, a short reply gets no row, so nothing shows that the format is on until the next long reply. If that confuses people, show the status and Stop under every latest reply while a format is on.
 
 - Ask Anthropic to let plugins add actions to the reply hover row (draft request below).
 - If the row starts to feel like wallpaper, show it only after dense, technical replies.

@@ -1,7 +1,8 @@
 import { atom, read, update } from 'claude-code'
 import type { Elements, EngineInterface, Register } from 'claude-code'
 
-// Replies shorter than this (characters) don't get the row: "Done", yes/no, etc.
+// Replies shorter than this (characters) don't get the row: "Done", yes/no, etc. While a format is on,
+// every latest reply gets it, so the format and Stop stay in view (a diagram reply has little text).
 const MIN_ANSWER_LENGTH = 600
 
 // The Markdown element draws at most this many characters; a longer reply keeps the engine's own drawing.
@@ -10,7 +11,7 @@ const MAX_MARKDOWN_LENGTH = 10000
 // How much of the reply the /explain chooser quotes so the person can see which reply it means.
 const QUOTE_LENGTH = 80
 
-// The main conversation's latest answer, whether the row is offered under it, whether /explain opened
+// The main conversation's latest answer, whether it is finished (the row may sit under it), whether /explain opened
 // the chooser, and which format was clicked (its Send now / Edit first choice is showing).
 const lastAnswer = atom({ plugin: 'explain-again', key: 'lastAnswer' } as const, null)
 const isRowOffered = atom({ plugin: 'explain-again', key: 'isRowOffered' } as const, false)
@@ -208,7 +209,7 @@ export const register: Register = on => {
 
     if (isMainAnswer) {
       await update($, lastAnswer, () => e.answer)
-      await update($, isRowOffered, () => e.answer.trim().length >= MIN_ANSWER_LENGTH)
+      await update($, isRowOffered, () => true)
       await update($, isChooserOpen, () => false)
       await update($, picked, () => null)
     }
@@ -252,14 +253,16 @@ export const register: Register = on => {
     return { text: 'Pick a format above the message box.' }
   })
 
-  // The row: under the last piece of the latest long reply only. Every other reply keeps the
-  // engine's own drawing, and the row moves on as soon as Claude starts something new.
+  // The row: under the last piece of the latest long reply only (any latest reply while a format is on).
+  // Every other reply keeps the engine's own drawing, and the row moves on as soon as Claude starts something new.
   on('ui.render', { component: 'AssistantMessage' }, async ($, e, next) => {
     const answer = await read($, lastAnswer)
-    const isOffered = await read($, isRowOffered)
+    const isFinished = await read($, isRowOffered)
+    const keptKey = await read($, keptFormat)
     const { text } = e.props
     const piece = normalize(text)
-    const isLatestEnding = isOffered && answer !== null && piece !== '' && normalize(answer).endsWith(piece)
+    const isOffered = isFinished && answer !== null && (keptKey !== null || answer.trim().length >= MIN_ANSWER_LENGTH)
+    const isLatestEnding = isOffered && piece !== '' && normalize(answer).endsWith(piece)
 
     if (!isLatestEnding || text.length > MAX_MARKDOWN_LENGTH) {
       return next(e)
@@ -271,7 +274,7 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Markdown text={text} />
-        <Box marginTop={1}>{choiceRow(elements, actionsFor($), await read($, picked), await read($, keptFormat), 'Explain another way')}</Box>
+        <Box marginTop={1}>{choiceRow(elements, actionsFor($), await read($, picked), keptKey, 'Explain another way')}</Box>
       </Box>
     )
   })

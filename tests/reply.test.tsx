@@ -218,6 +218,22 @@ test('messages typed in the desktop app carry the note too', async ($, on) => {
   await ui.unmount()
 })
 
+test('while a format is on, even a short reply shows it with Stop; after Stop, short replies get no row again', async ($, on) => {
+  world(on)
+  await finish($, ANSWER)
+  const ui = await $.ui.mount({ plugin: 'explain-again', surface: 'desktop', ...piece(ENDING) })
+  await ui.press({ key: 'diagram' })
+  await ui.press({ key: 'send-now' })
+  await finish($, 'Here is the diagram.')
+  const short = await $.ui.mount({ plugin: 'explain-again', surface: 'desktop', ...piece('Here is the diagram.') })
+  expect(await short.find({ type: 'Text', text: /Explaining as a diagram/ })).toBeDefined()
+  await short.press({ key: 'stop' })
+  expect(await short.find({ key: 'plain' })).toBeUndefined()
+  expect(await short.find({ key: 'stop' })).toBeUndefined()
+  await ui.unmount()
+  await short.unmount()
+})
+
 test('picking another format while one is on switches to it', async ($, on) => {
   const { sent } = world(on)
   await finish($, ANSWER)
