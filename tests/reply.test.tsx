@@ -173,8 +173,8 @@ test('the plain format reads naturally as a button and as the heading after a cl
   await ui.unmount()
 })
 
-// A message the person typed and sent themselves.
-const type = ($: any, text: string) => $.prompt.submit({ text, origin: { kind: 'composer' }, wait: false } as any)
+// A message the person typed and sent themselves: in the terminal, or in the desktop app (an SDK host).
+const type = ($: any, text: string, kind = 'composer') => $.prompt.submit({ text, origin: { kind }, wait: false } as any)
 const note = (e: any) => (e.context ?? []).join('\n')
 
 test('Send now keeps the format on: later messages ask for it, the row shows it with Stop', async ($, on) => {
@@ -203,6 +203,19 @@ test('Send now keeps the format on: later messages ask for it, the row shows it 
   expect(note(sent[2])).toBe('')
   await ui.unmount()
   await newest.unmount()
+})
+
+test('messages typed in the desktop app carry the note too', async ($, on) => {
+  const { sent } = world(on)
+  await finish($, ANSWER)
+  const ui = await $.ui.mount({ plugin: 'explain-again', surface: 'desktop', ...piece(ENDING) })
+  await ui.press({ key: 'diagram' })
+  await ui.press({ key: 'send-now' })
+  await type($, 'Next question', 'sdk')
+  expect(note(sent[1])).toContain('diagram')
+  await $.prompt.submit({ text: 'A background task finished', origin: { kind: 'task-notification' }, wait: false } as any)
+  expect(note(sent[2])).toBe('')
+  await ui.unmount()
 })
 
 test('picking another format while one is on switches to it', async ($, on) => {

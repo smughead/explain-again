@@ -59,8 +59,9 @@ type Shared = Pick<Elements['desktop'], 'Box' | 'Button' | 'Text'>
 
 const normalize = (text: string) => text.replace(/\s+/g, ' ').trim()
 
-// Messages the person sent themselves: typed here, or from their phone or the web.
-const PERSON_ORIGINS = ['composer', 'bridge']
+// Messages the person sent themselves: typed in the terminal, in the desktop app (its Code tab hosts
+// Claude Code through the SDK, so its messages arrive as `sdk`), or from their phone or the web.
+const PERSON_ORIGINS = ['composer', 'sdk', 'bridge']
 
 // What Claude reads beside each of the person's messages while a format stays on; they never see it.
 const keptNote = (format: Format) =>
