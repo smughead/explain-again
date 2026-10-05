@@ -19,6 +19,7 @@ A Claude Code mod (a plugin of function hooks), owned by smughead. README.md say
 - `claude plugin validate ./.claude-plugin/plugin.json` (the mod), `claude plugin validate .` (the install file) and `claude plugin test .` must all pass. Its warning that CLAUDE.md is not shipped as plugin context is expected: CLAUDE.md is for agents working in this repository. A drawing the app refuses renders nothing at all, silently; the render tests are what catch that.
 - Use the Claude Code CLI bundled with the desktop app: `~/Library/Application Support/Claude/claude-code/<version>/<hash>/claude.app/Contents/MacOS/claude`. The `claude` on PATH may be too old for mods.
 - Agents cannot screenshot the Claude app. Visual checks come from the owner: ask for one specific check at a time.
+- Before asking for a live check, confirm the session runs the current code. A desktop app session loads the mod once at start and reloads it only if `CLAUDE_CODE_PLUGIN_DIR_WATCH=1` was set when it started (check `env` in a shell). Otherwise the check needs a new session.
 
 ## Layout
 

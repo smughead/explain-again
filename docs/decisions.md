@@ -40,6 +40,7 @@ The owner's request: picking a format should act like an output mode for the res
 - A refused drawing above the message box shows nothing at all. A refused drawing of a reply falls back to the app's own.
 - Custom drawn regions (`Client`) are not available on desktop yet.
 - Work started inside a slash command's handler is cut off when the command finishes; schedule it with `$.clock.after`.
+- Desktop app sessions run Claude Code through the SDK: the mod is loaded once at session start and reloaded on file changes only with `CLAUDE_CODE_PLUGIN_DIR_WATCH=1` set. Three rounds of the first kept-format test ran the old version for this reason.
 
 ## Open ideas
 
